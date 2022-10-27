@@ -43,7 +43,7 @@ public class Humain {
 	
 	public void acheter(String bien, int prix) {
 		if (prix>argent) {
-			parler("Je n'ai que "+argent+" sous en poche. Je ne peux meme pas m'offrir un(e) "+bien+" à "+prix+"sous");
+			parler("Je n'ai que "+argent+" sous en poche. Je ne peux meme pas m'offrir un(e) "+bien+" à "+prix+" sous");
 		}else {
 			parler("J'ai "+argent+" sous en poche. Je vais pouvoir m'offrir un(e) "+bien+" à "+prix+"sous");
 			perdreArgent(prix);
