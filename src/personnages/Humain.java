@@ -4,6 +4,9 @@ public class Humain {
 	private String nom;
 	private String boissonFavorite;
 	private int argent;
+	private int nbConnaissanceMax=30;
+	private int nbConnaissance=0;
+	private Humain[] connaissance=new Humain[nbConnaissanceMax];
 
 	public Humain(String nom, String boissonFavorite, int argent) {
 		this.nom = nom;
@@ -43,11 +46,45 @@ public class Humain {
 	
 	public void acheter(String bien, int prix) {
 		if (prix>argent) {
-			parler("Je n'ai que "+argent+" sous en poche. Je ne peux meme pas m'offrir un(e) "+bien+" à "+prix+" sous");
+			parler("Je n'ai que "+argent+" sous en poche. Je ne peux meme pas m'offrir un(e) "+bien+" ï¿½ "+prix+" sous");
 		}else {
-			parler("J'ai "+argent+" sous en poche. Je vais pouvoir m'offrir un(e) "+bien+" à "+prix+"sous");
+			parler("J'ai "+argent+" sous en poche. Je vais pouvoir m'offrir un(e) "+bien+" ï¿½ "+prix+"sous");
 			perdreArgent(prix);
 		}
+	}
+	private void repondre(Humain humain) {
+		direbonjour();
+		memoriser(humain);
+		
+	}
+	
+	private void memoriser(Humain humain) {
+		if (nbConnaissance>nbConnaissanceMax-1) {
+			for (int i = 0; i < nbConnaissanceMax-1; i++) {
+				connaissance[i]=connaissance[i+1];
+				
+			}
+			connaissance[nbConnaissanceMax-1]=humain;
+		} else {
+				connaissance[nbConnaissance]=humain;
+				nbConnaissance++;
+		}
+		
+	}
+	
+	public void faireConnaissance(Humain humain) {
+		direbonjour();
+		humain.repondre(this);
+		memoriser(humain);
+		
+	}
+	
+	public void listerConnaissance() {
+		parler("Je connais beaucoup de monde dont :");
+		for (int i = 0; i < nbConnaissance; i++) {
+			System.out.print(" "+connaissance[i].getNom());
+		}
+		System.out.println("");
 	}
 }
 	
